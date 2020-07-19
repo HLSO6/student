@@ -1,0 +1,30 @@
+.cv{
+    display: inline-block;
+    text-align: center;
+    line-height: 34px;
+    width: 34px;
+    height: 30px;
+    background: white;
+    /*border: 1px solid red;*/
+    cursor: pointer;
+    color: #333;
+    margin-right: 4px;
+
+}
+
+/*.cv:first-child{*/
+/*    border-radius: 3px;*/
+/*    background: #4E6EF2;*/
+/*    color: #fff;*/
+/*}*/
+.cv:hover{
+    border-radius: 3px;
+    background: #4E6EF2;
+    color: #fff;
+}
+
+.footerd{
+    width: 620px;
+    margin: 20px auto;
+    background-color: #F5F5F6;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+    	http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql:///examdb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg name="ds" ref="druidDataSource"/>
+    </bean>
+
+    <!--        &lt;!&ndash;    Dao层注入&ndash;&gt;-->
+    <!--        <bean id="userDaoImpl" class="com.hnxy.dao.impl.UserDaoImpl">-->
+    <!--            <property name="qr" ref="queryRunner"/>-->
+    <!--        </bean>-->
+
+    <!--        &lt;!&ndash;  service层注入  &ndash;&gt;-->
+    <!--        <bean id="userServiceImpl" class="com.hnxy.service.impl.UserServiceImpl">-->
+    <!--            <property name="userDao" ref="userDaoImpl"/>-->
+    <!--        </bean>-->
+    <!-- 设置哪些请求是在请求静态文件不需要后端控制器处理 -->
+<!--    <mvc:resources location="/js/js/" mapping="/js/**"/>-->
+<!--    <mvc:resources location="/fonts/" mapping="/fonts/**"/>-->
+<!--    <mvc:resources location="/css/" mapping="/css/**"/>-->
+    <!--    扫描含有注解的类所在的包-->
+    <context:component-scan base-package="com.hnxy.dao"/>
+    <context:component-scan base-package="com.hnxy.service"/>
+    <context:component-scan base-package="com.hnxy.web"/>
+    <!-- 设置哪些请求是在请求静态文件不需要后端控制器处理 -->
+    <mvc:resources location="/static/" mapping="/static/**"/>
+    <!--  开启MVC核心功能  -->
+    <mvc:annotation-driven/>
+</beans>
