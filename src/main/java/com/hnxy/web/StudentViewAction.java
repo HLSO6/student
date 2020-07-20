@@ -2,16 +2,19 @@ package com.hnxy.web;
 
 import com.hnxy.entity.Student;
 import com.hnxy.service.StudentService;
+import com.hnxy.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 陆辉
@@ -22,7 +25,8 @@ public class StudentViewAction {
 
     @Autowired
     private StudentService studentService;
-
+    @Autowired
+    private ViewService viewService;
 
     @InitBinder
     public void dateBinder(WebDataBinder webDataBinder) {
@@ -55,5 +59,33 @@ public class StudentViewAction {
         mv.addObject ( "students", students );
         mv.setViewName ( "showPage.jsp" );
         return mv;
+    }
+
+    /**
+     * 统计视图区域
+     */
+
+    //分数线
+    @RequestMapping("showView")
+    public ModelAndView showView() {
+        ModelAndView mv = new ModelAndView ();
+        Map<String, Object> scoreLine = viewService.findScoreLine ();
+        mv.addObject ( "scoreLine", scoreLine );
+        mv.setViewName ( "showView.jsp" );
+        return mv;
+    }
+
+    //地区学生人数
+    @RequestMapping("findAreaStudents")
+    @ResponseBody
+    public List findAreaStudents() {
+        return viewService.findAreaStudents ();
+    }
+
+    //地区学生过线人数
+    @RequestMapping("findAreaStudentsByLine")
+    @ResponseBody
+    public List findAreaStudentsByLine() {
+        return viewService.findAreaStudentsByLine ();
     }
 }

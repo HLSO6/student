@@ -14,17 +14,16 @@
         function stuManager() {
             location.href = "findStudentsByPage";
         }
-
-        function addUser() {
-            location.href = "addUser.jsp";
+        function gotoView() {
+            location.href = "showView";
         }
-
     </script>
     <script src="static/bootstrap/js/jquery-3.5.1.js" type="text/javascript">
     </script>
     <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css"/>
     <script src="static/bootstrap/js/bootstrap.js" type="text/javascript">
     </script>
+    <script type="text/javascript" src="static/js/echarts.min.js"></script>
 </head>
 <body>
 <div class="jumbotron">
@@ -36,9 +35,9 @@
             <span class="glyphicon glyphicon-user"></span>
             展示学员信息
         </button>
-        <button class="btn btn-success" type="submit" onclick="addUser()">
+        <button class="btn btn-success" type="submit" onclick="gotoView()">
             <span class="glyphicon glyphicon-signal"></span>
-            添加学员信息
+            学员数据统计
         </button>
     </div>
 </div>
